@@ -46,7 +46,7 @@ async function run() {
 
     app.get("/touristSpots/:email", async (req, res) => {
       const email = req.params.email;
-      const query = { email };
+      const query = {userEmail: email.toLocaleLowerCase() };
       const result = await touristSpotCollection.find(query).toArray();
       res.send(result);
     });
@@ -79,7 +79,7 @@ async function run() {
       res.send(result);
     });
 
-    app.delete("/touristSpot/:id", async (req, res) => {
+    app.delete("/delete/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await touristSpotCollection.deleteOne(query);
